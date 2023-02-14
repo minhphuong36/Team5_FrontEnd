@@ -1,12 +1,12 @@
 let isCreate=true;
-let divShow = document.getElementById("show")
+let divShow = document.getElementById("showProduct")
 
 function showProduct(){
     $.ajax({
         type:"GET",
         headers:{
-            'Accept':'application/json',
-            'Authorization': 'Bearer' + localStorage.setItem("token")
+            'Accept':'application/json'
+            // 'Authorization': 'Bearer' + localStorage.setItem("token")
         },
         url:"http://localhost:8080/product",
         success: function (data) {
@@ -14,15 +14,24 @@ function showProduct(){
             let str=""
             for (const product of data){
                 str+= `
-                <div class="card" style="width:400px">
-                  <img class="card-img-top" src="${product.img}" alt="Card image" style="width:100%">
-                  <div class="card-body">
-                     <h4 class="card-title">${product.name}</h4>
-                     <p class="card-text">${product.price}</p>
-                     <p class="card-text" hidden>${product.id}</p>
-                     <a href="#" class="btn btn-primary">See Product</a>
+                <li>
+                  <figure>
+                    <a class="aa-product-img" href="#"><img src="${product.img}" alt="polo shirt img"></a>
+                    <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                    <figcaption>
+                      <h4 class="aa-product-title"><a href="#">${product.name}</a></h4>
+                      <span class="aa-product-price">$ ${product.price}</span>
+                    </figcaption>
+                  </figure>
+                  <div class="aa-product-hvr-content">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
+                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
                   </div>
-                </div> `
+                  <!-- product badge -->
+<!--                  <span class="aa-badge aa-sale" href="#">SALE!</span>-->
+                </li>
+                      `
             }
 
             divShow.innerHTML =str;
