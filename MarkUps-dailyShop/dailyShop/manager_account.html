@@ -26,24 +26,25 @@
             <th>Phone Number</th>
             <th>Status</th>
             <th>Role</th>
-            <th >Choice Status</th>
+            <th>Choice Status</th>
 
         </tr>
         </thead>
         <tbody id="show">
-<!--        <tr class="table-primary">-->
-<!--            <td>Success</td>-->
-<!--            <td>Doe</td>-->
-<!--            <td>john@example.com</td>-->
-<!--            <td>Success</td>-->
-<!--            <td>Doe</td>-->
-<!--            <td>john@example.com</td>-->
-<!--            <td>john@example.com</td>-->
-<!--        </tr>-->
+        <!--        <tr class="table-primary">-->
+        <!--            <td>Success</td>-->
+        <!--            <td>Doe</td>-->
+        <!--            <td>john@example.com</td>-->
+        <!--            <td>Success</td>-->
+        <!--            <td>Doe</td>-->
+        <!--            <td>john@example.com</td>-->
+        <!--            <td>john@example.com</td>-->
+        <!--        </tr>-->
         </tbody>
     </table>
 </div>
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -89,11 +90,11 @@
                       <td>${account.role}</td>
 
 
-<td>  <input type="radio" id="html" name="fav_language" value="1">
+<td>  <input type="radio" id="radio1" name="fav_language" value="1">
   <label for="html">Block</label><br>
-  <input type="radio" id="css" name="fav_language" value="2">
+  <input type="radio" id="radio2" name="fav_language" value="2">
   <label for="css">UnBlock</label><br></td>
- <td><input type="button" onclick="ShowBlock(${account.id})"></td>
+ <td><input type="button" onclick="ShowBlock(${account.id})" ></td>
                       </tr>
                       `
 
@@ -107,6 +108,7 @@
             }
         })
     }
+
     show();
 
 
@@ -118,6 +120,7 @@
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
             },
+
             url: "http://localhost:8080/account/" + id,
             data: JSON.stringify(id),
             //xử lý khi thành công
@@ -133,29 +136,58 @@
 
 
     function ShowBlock(id) {
-        $.ajax({
-            type: "",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem("token")
-            },
-            url: "http://localhost:8080/account/" + id,
-            data: JSON.stringify(id),
-            //xử lý khi thành công
-            success: function (data) {
-                alert("Thành công");
-                show();
-            },
-            error: function (err) {
-                console.log(err)
-            }
-        })
+        let status1 = document.getElementById("radio1").value();
+        let status2 = document.getElementById("radio2").value();
+        if (status1 == 1) {
+            $.ajax({
+                type: "Put",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+                },
+                url: "http://localhost:8080/account/Block/" + id + "/" + status1,
+                data: JSON.stringify(id),
+//xử lý khi thành công
+                success: function (data) {
+                    alert("Thành công");
+                    show();
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+
+        } else {
+            $.ajax({
+                type: "Put",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+                },
+                url: "http://localhost:8080/account/Block/" + id + "/" + status2,
+                data: JSON.stringify(id),
+//xử lý khi thành công
+                success: function (data) {
+                    alert("Thành công");
+                    show();
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+
+
+        }
 
 
     }
 
 
-
 </script>
+
+
 
