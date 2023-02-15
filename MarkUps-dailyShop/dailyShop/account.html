@@ -345,15 +345,15 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
-                <h4>Login</h4>
+                <h4>Register</h4>
                  <form action="" class="aa-login-form">
-                  <label for="">Username or Email address<span>*</span></label>
-                   <input type="text" placeholder="Username or email">
+                   <input  id="id" hidden>
+                  <label for="">Username<span>*</span></label>
+                   <input type="text" placeholder="Username" id="username" onchange="checkUser(this.value)">
                    <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="Password">
-                    <button type="submit" class="aa-browse-btn">Login</button>
-                    <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
-                    <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
+                    <input type="password" placeholder="Password" id="password">
+                   <label for="">Phone Number<span>*</span></label>
+                   <input type="text" placeholder="phone number" id="phoneNumber">
                   </form>
                 </div>
               </div>
@@ -361,11 +361,16 @@
                 <div class="aa-myaccount-register">                 
                  <h4>Register</h4>
                  <form action="" class="aa-login-form">
-                    <label for="">Username or Email address<span>*</span></label>
-                    <input type="text" placeholder="Username or email">
-                    <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="Password">
-                    <button type="submit" class="aa-browse-btn">Register</button>                    
+                    <label for="">Address<span>*</span></label>
+                    <input type="text" placeholder="adress" id="address">
+                    <label for="">Chose Img<span>*</span></label>
+                    <input type="file" onchange="showImg()" id="avatar" >
+                    <img id="blah" src="#" alt="" height="150" width="150" style="margin:-45px 0px 0px 305px">
+<!--                   <label for="">Status<span>*</span></label>-->
+                   <input type="text" value="1" id="status" hidden>
+<!--                   <label for="">Role<span>*</span></label>-->
+                   <input type="text" value="user" id="role" hidden>
+                    <button type="button" class="aa-browse-btn" onclick="upImg()" style="margin-top: 70px">Register</button>
                   </form>
                 </div>
               </div>
@@ -520,3 +525,95 @@
 
   </body>
 </html>
+<script>
+  function checkUser() {
+    $.ajax({
+      type: "Get",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*'
+      },
+      url: "http://localhost:8080/register/" + username,
+      //xử lý khi thành công
+      success: function (account) {
+
+      },
+      error: function (err) {
+        alert("trung ten dang nhap")
+        console.log(err)
+      }
+    })
+
+
+  }
+
+
+
+
+
+  let isCreate = true;
+  let imgInp = document.getElementById("avatar");
+  let blah = document.getElementById("blah");
+
+  function showImg() {
+    let file = imgInp.files;
+    blah.src = URL.createObjectURL(file[0])
+  }
+  function upImg() {
+    let fileImg = document.getElementById("avatar").files;
+    var formData = new FormData();
+    formData.append("fileImg", fileImg[0]);
+
+    $.ajax({
+      contentType: false,
+      processData: false,
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
+      },
+      type: "POST",
+      data: formData,
+      url: "http://localhost:8080/account/upImg",
+      success: function (avatar) {
+        create(avatar)
+      }
+    });
+  }
+
+  function create(avatar) {
+    let acoount = {
+      "username": document.getElementById("username").value,
+      "password": $("#password").val(),
+      "avatar": avatar,
+      "address":$("#address").val(),
+      "phoneNumber":$("#phoneNumber").val(),
+      "status":$("#status").val(),
+      "role":$("#role").val()
+    }
+
+    if (!isCreate) {
+      acoount.id = $("#id").val();
+    }
+
+    $.ajax({
+      type: "Post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+      },
+      url: "http://localhost:8080/account",
+      data: JSON.stringify(acoount),
+      //xử lý khi thành công
+      success: function (data) {
+        alert("Thành công");
+        location.href="index.html";
+
+      },
+      error: function (err) {
+        console.log(err)
+      }
+    })
+  }
+</script>
