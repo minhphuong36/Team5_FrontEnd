@@ -36,6 +36,10 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <![endif]-->
   
 
@@ -101,7 +105,7 @@
                   <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
                   <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
                   <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
-                  <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                  <li><a href="" data-toggle="modal" data-target="#login-modal" id="username">nam</a></li>
                 </ul>
               </div>
             </div>
@@ -712,7 +716,42 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div>
+<!--start Modal-->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Blog</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+<!--          <div class="modal-body">-->
+<!--            <input placeholder="nhập EmployeeCode" id="id" hidden><br>-->
+<!--            <input placeholder="nhập EmployeeCode" id="name_product" ><br>-->
+<!--            <input placeholder="nhập EmployeeName" id=""><br>-->
+<!--            <input placeholder="nhập EmployeeAge" id=""><br>-->
+<!--            <input placeholder="nhập EmployeeSalary" id="price"><br>-->
+<!--            <select id="quantity">-->
+<!--              -->
+<!--            </select>-->
+<!--          </div>-->
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="create()" data-dismiss="modal">Submit
+            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+<!--    end modal-->
 
     
   <!-- jQuery library -->
@@ -736,6 +775,7 @@
   <!-- Custom js -->
   <script src="js/custom.js"></script>
   <script src="./productDetail/product-detail.js"></script>
+    <script src="./productDetail/cart.js"></script>
 
   </body>
 </html>

@@ -26,7 +26,7 @@ function showProductDetail(){
                 <div class="aa-product-view-slider">                                
                     <div  class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
-                        <div class="simpleLens-big-image-container"><a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image"><img src="${p.product.img}" class="simpleLens-big-image"></a></div>
+                        <div class="simpleLens-big-image-container"><a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image" data-toggle="modal" data-target="#myModal"><img src="${p.product.img}" class="simpleLens-big-image"></a></div>
                       </div>
                     </div>
                   </div>
@@ -34,14 +34,14 @@ function showProductDetail(){
                 <!-- Modal view content -->
                 <div class="col-md-7 col-sm-7 col-xs-12">
                   <div class="aa-product-view-content">
-                    <h3>${p.product.name}</h3>
+                    <h3 id="name">${p.product.name}</h3>
                     <div class="aa-price-block">
-                      <span class="aa-product-view-price">$ ${p.product.price}</span>
-                      <p class="aa-product-avilability">Avilability: <span>${p.quantity}</span></p>
+                      <span class="aa-product-view-price" id="price">$ ${p.product.price}</span>
+                      <p class="aa-product-avilability">Avilability: <span id="quantity">${p.quantity}</span></p>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
                     <h4>Size</h4>
-                    <div class="aa-prod-view-size" id="listSize">
+                    <div class="aa-prod-view-size" id="listSize" id="size">
                     ${p.size.name}
                     </div>
                   
@@ -54,7 +54,7 @@ function showProductDetail(){
                       </p>
                     </div>
                     <div class="aa-prod-view-bottom">
-                      <a class="aa-add-to-cart-btn" href="./cart.html" onclick="addToCart(${p.id})">Add To Cart</a>
+                      <a class="aa-add-to-cart-btn" href="./cart.html"  onclick="addToCart(${p.id})">Add To Cart</a>
                       <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
                       <a class="aa-add-to-cart-btn" href="#">Compare</a>
                     </div>
