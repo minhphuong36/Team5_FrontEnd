@@ -26,6 +26,7 @@
             <th>Phone Number</th>
             <th>Status</th>
             <th>Role</th>
+            <th >Choice Status</th>
 
         </tr>
         </thead>
@@ -41,6 +42,25 @@
 <!--        </tr>-->
         </tbody>
     </table>
+</div>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
@@ -67,10 +87,16 @@
                       <td>${account.phoneNumber}</td>
                       <td>${account.status}</td>
                       <td>${account.role}</td>
-                      <td><button type="button" class="btn btn-warning"  onclick="showDelete(${account.id})">Delete</button></td>
 
-                 </tr>
+
+<td>  <input type="radio" id="html" name="fav_language" value="1">
+  <label for="html">Block</label><br>
+  <input type="radio" id="css" name="fav_language" value="2">
+  <label for="css">UnBlock</label><br></td>
+ <td><input type="button" onclick="ShowBlock(${account.id})"></td>
+                      </tr>
                       `
+
                 }
 
                 document.getElementById("show").innerHTML = str;
@@ -103,6 +129,30 @@
                 console.log(err)
             }
         })
+    }
+
+
+    function ShowBlock(id) {
+        $.ajax({
+            type: "",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+            url: "http://localhost:8080/account/" + id,
+            data: JSON.stringify(id),
+            //xử lý khi thành công
+            success: function (data) {
+                alert("Thành công");
+                show();
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+
+
     }
 
 
