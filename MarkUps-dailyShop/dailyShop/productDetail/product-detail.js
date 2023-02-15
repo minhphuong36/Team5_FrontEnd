@@ -19,8 +19,9 @@ function showProductDetail(){
             console.log("ok")
 
             let str=""
-            for (const p of data){
-                str +=`
+            if (data.length!==0) {
+                for (const p of data) {
+                    str += `
             <div class="col-md-5 col-sm-5 col-xs-12">                              
                 <div class="aa-product-view-slider">                                
                     <div  class="simpleLens-gallery-container">
@@ -53,7 +54,7 @@ function showProductDetail(){
                       </p>
                     </div>
                     <div class="aa-prod-view-bottom">
-                      <a class="aa-add-to-cart-btn" href="#">Add To Cart</a>
+                      <a class="aa-add-to-cart-btn" href="./cart.html" onclick="addToCart(${p.id})">Add To Cart</a>
                       <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
                       <a class="aa-add-to-cart-btn" href="#">Compare</a>
                     </div>
@@ -62,13 +63,12 @@ function showProductDetail(){
               </div>
             </div>   
                 `
-                if (data.length==0){
-                    str += "Hết Hàng"
-
                 }
-            document.getElementById("product-detail").innerHTML=str
-            }
 
+            } else {
+                str+= "SẢN PHẨM HIỆN KHÔNG CÒN,XIN CẢM ƠN"
+            }
+            document.getElementById("product-detail").innerHTML=str
 
 
             },
