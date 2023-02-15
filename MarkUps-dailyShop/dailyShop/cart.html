@@ -173,7 +173,7 @@
               <!-- search box -->
               <div class="aa-search-box">
                 <form action="">
-                  <input type="text" name="" id="" placeholder="Search here ex. 'man' ">
+                  <input type="text" name=""  placeholder="Search here ex. 'man' ">
                   <button type="submit"><span class="fa fa-search"></span></button>
                 </form>
               </div>
@@ -349,8 +349,8 @@
                     <thead>
                       <tr>
                         <th></th>
-                        <th></th>
-                        <th>Product</th>
+                        <th>Img</th>
+                        <th>Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Size</th>
@@ -358,7 +358,7 @@
                     </thead>
                     <tbody id="showCart">
 
-                      </tbody>
+                    </tbody>
                   </table>
                 </div>
              </form>
@@ -366,18 +366,11 @@
              <div class="cart-view-total">
                <h4>Cart Totals</h4>
                <table class="aa-totals-table">
-                 <tbody>
-                   <tr>
-                     <th>Subtotal</th>
-                     <td>$450</td>
-                   </tr>
-                   <tr>
-                     <th>Total</th>
-                     <td>$450</td>
-                   </tr>
+                 <tbody id="showTotalMoney">
+
                  </tbody>
                </table>
-               <a href="#" class="aa-cart-view-btn">Proced to Checkout</a>
+               <a href="#" class="aa-cart-view-btn" onclick="createBill()">Pay the bill</a>
              </div>
            </div>
          </div>
@@ -547,6 +540,7 @@
     <!-- Custom js -->
     <script src="js/custom.js"></script>
   <script src="./productDetail/cart.js"></script>
+  <script src="./productDetail/bill.js"></script>
 
   </body>
 </html>

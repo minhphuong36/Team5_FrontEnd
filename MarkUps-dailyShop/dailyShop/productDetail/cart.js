@@ -21,7 +21,7 @@ function showCart() {
                         <td><a href="#"><img src="${cart.img}" alt="img"></a></td>
                         <td><a class="aa-cart-title" href="#">${cart.name}</a></td>
                         <td>${cart.price}</td>
-                        <td><input class="aa-cart-quantity" type="number"  value="${cart.quantity}"></td>
+                        <td><p class="aa-cart-quantity" >${cart.quantity}</td>
                         <td>${cart.size}</td>
                         <td><button class="btn btn-warning" onclick="deleteCartItem(${cart.id})">Delete</button></td>
                     </tr>
@@ -69,8 +69,35 @@ function deleteCartItem(x){
         success:function (data){
             console.log("ok")
             showCart()
+            sum()
         }, error : function (err){
             console.log(err)
         }
     })
 }
+
+function sum(){
+    let user = document.getElementById("username").innerText
+    console.log("ok")
+    $.ajax({
+        type:"GET",
+        headers:{
+            'Accept': 'application/json'
+        },
+        url :"http://localhost:8080/cart/sum/"+user,
+        success:function (sum){
+            let str=""
+            str+= `
+                   <tr>
+                     <th>Subtotal</th>
+                     <td>$ ${sum}</td>
+                   </tr>
+            `
+            document.getElementById("showTotalMoney").innerHTML=str
+        },
+        error : function (err){
+            console.log(err)
+        }
+    })
+}
+sum()
