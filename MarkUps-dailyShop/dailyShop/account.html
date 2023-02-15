@@ -526,27 +526,27 @@
   </body>
 </html>
 <script>
-  function checkUser() {
-    $.ajax({
-      type: "Get",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin':'*'
-      },
-      url: "http://localhost:8080/register/" + username,
-      //xử lý khi thành công
-      success: function (account) {
-
-      },
-      error: function (err) {
-        alert("trung ten dang nhap")
-        console.log(err)
-      }
-    })
-
-
-  }
+  // function checkUser() {
+  //   $.ajax({
+  //     type: "Get",
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //       'Access-Control-Allow-Origin':'*'
+  //     },
+  //     url: "http://localhost:8080/register/" + username,
+  //     //xử lý khi thành công
+  //     success: function (account) {
+  //
+  //     },
+  //     error: function (err) {
+  //       alert("trung ten dang nhap")
+  //       console.log(err)
+  //     }
+  //   })
+  //
+  //
+  // }
 
 
 
@@ -613,6 +613,7 @@
       },
       error: function (err) {
         console.log(err)
+        alert("da trug")
       }
     })
   }
