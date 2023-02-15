@@ -347,11 +347,13 @@
                 <div class="aa-myaccount-login">
                 <h4>Register</h4>
                  <form action="" class="aa-login-form">
-                   <input  id="id" hidden>
+<!--                   <input  id="id" hidden>-->
                   <label for="">Username<span>*</span></label>
                    <input type="text" placeholder="Username" id="username" onchange="checkUser(this.value)">
+                   <div id="checkInput" style="color: red"></div>
                    <label for="">Password<span>*</span></label>
                     <input type="password" placeholder="Password" id="password">
+                   <div id="checkInput1" style="color: red"></div>
                    <label for="">Phone Number<span>*</span></label>
                    <input type="text" placeholder="phone number" id="phoneNumber">
                   </form>
@@ -581,6 +583,14 @@
   }
 
   function create(avatar) {
+
+    let password = document.getElementById("password").value;
+    if (password.length>8){
+
+    }else {
+      document.getElementById("checkInput1").innerHTML=
+              "password length from 8 characters"
+    }
     let acoount = {
       "username": document.getElementById("username").value,
       "password": $("#password").val(),
@@ -613,8 +623,7 @@
       },
       error: function (err) {
         console.log(err)
-        alert("da trug")
-      }
+        document.getElementById("checkInput").innerHTML="Account already exists"      }
     })
   }
 </script>
