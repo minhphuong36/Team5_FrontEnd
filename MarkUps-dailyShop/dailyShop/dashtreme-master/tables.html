@@ -130,9 +130,74 @@
   </ul>
 </nav>
 </header>
+
 <!--End topbar header-->
+     <nav  style="margin-left: 250px; margin-top: 100px;background:red;"  >
+         <div class="container mt-3" >
+
+
+
+             <table class="table" style="">
+                 <input type="text" id="search">
+                 <button onclick="search()">search</button>
+
+                 <thead >
+
+                 <tr >
+                     <th>User Name</th>
+                     <th>Password</th>
+                     <th>Address</th>
+                     <th>Avatar</th>
+                     <th>Phone Number</th>
+                     <th>Status</th>
+                     <th>Role</th>
+                     <th >Choice Status</th>
+
+                 </tr>
+                 </thead>
+                 <tbody id="show" style="background:yellow">
+                 <!--        <tr class="table-primary">-->
+                 <!--            <td>Success</td>-->
+                 <!--            <td>Doe</td>-->
+                 <!--            <td>john@example.com</td>-->
+                 <!--            <td>Success</td>-->
+                 <!--            <td>Doe</td>-->
+                 <!--            <td>john@example.com</td>-->
+                 <!--            <td>john@example.com</td>-->
+                 <!--        </tr>-->
+                 </tbody>
+             </table>
+         </div>
+         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body">
+                         ...
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                         <button type="button" class="btn btn-primary">Save changes</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+     </nav>
+
+
 
 <!--code here-->
+
+
+
+
+
 	
 	<!--Start footer-->
 	<footer class="footer">
@@ -200,3 +265,137 @@
 	
 </body>
 </html>
+<script>
+    function show() {
+        $.ajax({
+            type: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+            url: "http://localhost:8080/account",
+            //xử lý khi thành công
+            success: function (accounts) {
+                console.log(accounts)
+                let str = '';
+                for (const account of accounts) {
+                    str += `
+                <tr style="background: white;color: black" >
+                      <td>${account.username}</td>
+                      <td>${account.password}</td>
+                      <td>${account.address}</td>
+                      <td><img src="${account.avatar}" width="100" height="100"></td>
+                      <td>${account.phoneNumber}</td>
+                      <td>${account.status}</td>
+                      <td>${account.role}</td>
+                      <td><button type="button" class="btn btn-warning"  onclick="ShowBlock(${account.id})">Block</button></td>
+
+
+
+                </tr>
+                      `
+
+                }
+
+                document.getElementById("show").innerHTML = str;
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+    show();
+
+
+    // function showDelete(id) {
+    //     $.ajax({
+    //         type: "Delete",
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             // 'Content-Type': 'application/json',
+    //             // 'Authorization': 'Bearer ' + localStorage.getItem("token"),
+    //         },
+    //         url: "http://localhost:8080/account/" + id,
+    //         data: JSON.stringify(id),
+    //         //xử lý khi thành công
+    //         success: function (data) {
+    //             alert("Thành công");
+    //             show();
+    //         },
+    //         error: function (err) {
+    //             console.log(err)
+    //         }
+    //     })
+    // }
+
+
+    function ShowBlock(id) {
+        $.ajax({
+            type: "Post",
+            headers: {
+                'Accept': 'application/json',
+                // 'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+            url: "http://localhost:8080/account/block/" +id,
+            data: JSON.stringify(id),
+            //xử lý khi thành công
+            success: function (data) {
+                alert("Thành công");
+                show();
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+
+
+    }
+
+    function search() {
+
+        let username = document.getElementById("search").value;
+        $.ajax({
+            type: "GET",
+            headers: {
+                'Accept': 'application/json',
+                // 'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+            url: "http://localhost:8080/account/search/" + username,
+            data: JSON.stringify(username),
+            //xử lý khi thành công
+            success: function (accounts) {
+                console.log(accounts)
+                let str = '';
+                for (const account of accounts) {
+                    str += `
+                <tr style="background: white;color: black" >
+                      <td>${account.username}</td>
+                      <td>${account.password}</td>
+                      <td>${account.address}</td>
+                      <td><img src="${account.avatar}" width="100" height="100"></td>
+                      <td>${account.phoneNumber}</td>
+                      <td>${account.status}</td>
+                      <td>${account.role}</td>
+                      <td><button type="button" class="btn btn-warning"  onclick="ShowBlock(${account.id})">Block</button></td>
+
+
+
+                </tr>
+                      `
+
+                }
+
+                document.getElementById("show").innerHTML = str;
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+
+
+    }
+
+</script>

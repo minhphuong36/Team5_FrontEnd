@@ -2027,13 +2027,20 @@
         localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("username", JSON.stringify(data.username));
         localStorage.setItem("id" , JSON.stringify(data.id))
-        alert("thành công" + JSON.stringify(data.role))
+        // alert("thành công" + JSON.stringify(data.role))
 
 
-        if(data.role == 'admin'){
-          location.href="manager_account.html";
-        }else{
+        if(data.role == 'admin' ){
+          // location.href="manager_account.html";
+          location.href="dashtreme-master/index.html";
+        }
+        if(data.role == 'user' && data.status == 1 ){
+          alert("ok")
           location.href="product.html";
+        }
+        if(data.role == 'user' && data.status == 2){
+          alert("da bi khoa")
+          location.href="index.html";
         }
       },
       error: function (err) {
