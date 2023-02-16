@@ -12,6 +12,17 @@ function Bill() {
     })
 }
 
+function deleteBillStatus1(){
+    $.ajax({
+        type:"POST",
+        headers:{
+            'Accept': 'application/json',
+            'Content_Type':'application/json'
+        },
+        url:"http://localhost:8080/bill/deleteBillStatus",
+    })
+}
+
 
 function billDetail(x){
     alert("init")
@@ -25,6 +36,9 @@ function billDetail(x){
         url:"http://localhost:8080/billDetail/save/"+ x+"&"+ username,
         success:function (data){
             alert("create detail ok")
+            if (data==null){
+
+            }
         },
         error : function (err){
             console.log(err)
@@ -60,6 +74,7 @@ function changeStatus(username){
 
 
 
+
 function createBill(){
     Bill()
 
@@ -76,6 +91,7 @@ function createBill(){
                 deleteAfterBill(c.id)
             }
             changeStatus(username)
+            deleteBillStatus1()
         }, error:function (err){
             console.log(err)
         }
